@@ -47,6 +47,46 @@ import type {
 } from "./types.gen"
 
 export class ItemsService {
+
+  private static staticItems = [
+    {
+      title: "Item 1",
+      description: "Description for Item 1",
+      id: "11111111-1111-1111-1111-111111111111",
+      owner_id: "aaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa",
+    },
+    {
+      title: "Item 2",
+      description: "Description for Item 2",
+      id: "22222222-2222-2222-2222-222222222222",
+      owner_id: "bbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb",
+    },
+    {
+      title: "Item 3",
+      description: "Description for Item 3",
+      id: "33333333-3333-3333-3333-333333333333",
+      owner_id: "ccccccc-cccc-cccc-cccc-ccccccccccc",
+    },
+    {
+      title: "Item 4",
+      description: "Description for Item 4",
+      id: "44444444-4444-4444-4444-444444444444",
+      owner_id: "ddddddd-dddd-dddd-dddd-ddddddddddd",
+    },
+    {
+      title: "Item 5",
+      description: "Description for Item 5",
+      id: "55555555-5555-5555-5555-555555555555",
+      owner_id: "eeeeeee-eeee-eeee-eeee-eeeeeeeeeee",
+    },
+    {
+      title: "Item 6",
+      description: "Description for Item 6",
+      id: "66666666-6666-6666-6666-666666666666",
+      owner_id: "fffffff-ffff-ffff-ffff-fffffffffff",
+    },
+  ]
+
   /**
    * Read Items
    * Retrieve items.
@@ -59,17 +99,19 @@ export class ItemsService {
   public static readItems(
     data: ItemsReadItemsData = {},
   ): CancelablePromise<ItemsReadItemsResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/api/v1/items/",
-      query: {
-        skip: data.skip,
-        limit: data.limit,
-      },
-      errors: {
-        422: "Validation Error",
-      },
-    })
+    const { skip = 0, limit = 5 } = data
+
+    // paging process
+    const paginatedItems = ItemsService.staticItems.slice(skip, skip + limit)
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: paginatedItems,
+          count: ItemsService.staticItems.length,
+        })
+      }, 500)
+    }) as CancelablePromise<ItemsReadItemsResponse>
   }
 
   /**
@@ -83,15 +125,20 @@ export class ItemsService {
   public static createItem(
     data: ItemsCreateItemData,
   ): CancelablePromise<ItemsCreateItemResponse> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/api/v1/items/",
-      body: data.requestBody,
-      mediaType: "application/json",
-      errors: {
-        422: "Validation Error",
-      },
-    })
+    const newItem = {
+      id: crypto.randomUUID(), // generate random id
+      owner_id: "d9d7fca5-cf19-42c3-a9d5-42cfa3510598",   // refer to current user
+      title: data.requestBody.title,
+      description: data.requestBody.description || "",
+    }
+
+    ItemsService.staticItems.push(newItem)
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(newItem)
+      }, 500)
+    }) as CancelablePromise<ItemsCreateItemResponse>
   }
 
   /**
@@ -102,6 +149,7 @@ export class ItemsService {
    * @returns ItemPublic Successful Response
    * @throws ApiError
    */
+  // TODO - need to update this method
   public static readItem(
     data: ItemsReadItemData,
   ): CancelablePromise<ItemsReadItemResponse> {
@@ -126,22 +174,35 @@ export class ItemsService {
    * @returns ItemPublic Successful Response
    * @throws ApiError
    */
-  public static updateItem(
-    data: ItemsUpdateItemData,
-  ): CancelablePromise<ItemsUpdateItemResponse> {
-    return __request(OpenAPI, {
-      method: "PUT",
-      url: "/api/v1/items/{id}",
-      path: {
-        id: data.id,
-      },
-      body: data.requestBody,
-      mediaType: "application/json",
-      errors: {
-        422: "Validation Error",
-      },
-    })
-  }
+public static updateItem(
+  data: ItemsUpdateItemData
+): Promise<ItemsUpdateItemResponse> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // 找到需要更新的 item
+      const index = ItemsService.staticItems.findIndex(
+        (item) => item.id === data.id
+      )
+
+      if (index === -1) {
+        return reject(new Error("Item not found"))
+      }
+
+      // 处理 null 值，确保字段是 string 类型
+      const updatedItem = {
+        ...ItemsService.staticItems[index],
+        title: data.requestBody.title ?? ItemsService.staticItems[index].title,
+        description:
+          data.requestBody.description ?? ItemsService.staticItems[index].description,
+      }
+
+      // 更新数据
+      ItemsService.staticItems[index] = updatedItem
+
+      resolve(updatedItem)
+    }, 300) // 模拟网络请求延迟
+  })
+}
 
   /**
    * Delete Item
@@ -152,17 +213,25 @@ export class ItemsService {
    * @throws ApiError
    */
   public static deleteItem(
-    data: ItemsDeleteItemData,
-  ): CancelablePromise<ItemsDeleteItemResponse> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/api/v1/items/{id}",
-      path: {
-        id: data.id,
-      },
-      errors: {
-        422: "Validation Error",
-      },
+    data: ItemsDeleteItemData
+  ): Promise<ItemsDeleteItemResponse> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // 查找要删除的 item
+        const index = ItemsService.staticItems.findIndex(
+          (item) => item.id === data.id
+        )
+  
+        if (index === -1) {
+          return reject(new Error("Item not found"))
+        }
+  
+        // 从数组中移除该 item
+        ItemsService.staticItems.splice(index, 1)
+  
+        // 返回成功消息
+        resolve({ message: "Item deleted successfully" })
+      }, 300) // 模拟网络请求延迟
     })
   }
 }

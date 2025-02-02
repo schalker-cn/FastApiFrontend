@@ -14,7 +14,8 @@ import {
 import useCustomToast from "./useCustomToast"
 
 const isLoggedIn = () => {
-  return localStorage.getItem("access_token") !== null
+  return true;
+  // return localStorage.getItem("access_token") !== null
 }
 
 const useAuth = () => {
@@ -22,11 +23,24 @@ const useAuth = () => {
   const navigate = useNavigate()
   const showToast = useCustomToast()
   const queryClient = useQueryClient()
-  const { data: user, isLoading } = useQuery<UserPublic | null, Error>({
-    queryKey: ["currentUser"],
-    queryFn: UsersService.readUserMe,
-    enabled: isLoggedIn(),
-  })
+  // const { data: user, isLoading } = useQuery<UserPublic | null, Error>({
+  //   queryKey: ["currentUser"],
+  //   queryFn: UsersService.readUserMe,
+  //   enabled: isLoggedIn(),
+  // })
+  // Mock user data based on actual API response structure
+  const mockUser: UserPublic = {
+    email: "tiandi1xc@gmail.com",
+    is_active: true,
+    is_superuser: false,
+    full_name: "test",
+    id: "d9d7fca5-cf19-42c3-a9d5-42cfa3510598",
+  };
+
+  // Simulating a constant "loaded" state
+  const user = mockUser;
+  const isLoading = false; // Always false, no API call
+
 
   const signUpMutation = useMutation({
     mutationFn: (data: UserRegister) =>
