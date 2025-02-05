@@ -179,7 +179,7 @@ public static updateItem(
 ): Promise<ItemsUpdateItemResponse> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // 找到需要更新的 item
+      // retrieve item id
       const index = ItemsService.staticItems.findIndex(
         (item) => item.id === data.id
       )
@@ -188,7 +188,6 @@ public static updateItem(
         return reject(new Error("Item not found"))
       }
 
-      // 处理 null 值，确保字段是 string 类型
       const updatedItem = {
         ...ItemsService.staticItems[index],
         title: data.requestBody.title ?? ItemsService.staticItems[index].title,
@@ -217,7 +216,6 @@ public static updateItem(
   ): Promise<ItemsDeleteItemResponse> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // 查找要删除的 item
         const index = ItemsService.staticItems.findIndex(
           (item) => item.id === data.id
         )
@@ -226,12 +224,10 @@ public static updateItem(
           return reject(new Error("Item not found"))
         }
   
-        // 从数组中移除该 item
         ItemsService.staticItems.splice(index, 1)
   
-        // 返回成功消息
         resolve({ message: "Item deleted successfully" })
-      }, 300) // 模拟网络请求延迟
+      }, 300)
     })
   }
 }
@@ -423,6 +419,8 @@ export class UsersService {
    * @returns UserPublic Successful Response
    * @throws ApiError
    */
+
+  // TODO - update this method
   public static updateUserMe(
     data: UsersUpdateUserMeData,
   ): CancelablePromise<UsersUpdateUserMeResponse> {
