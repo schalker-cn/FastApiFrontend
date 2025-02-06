@@ -16,11 +16,6 @@ OpenAPI.TOKEN = async () => {
 const queryClient = new QueryClient()
 
 const router = createRouter({ routeTree })
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router
-  }
-}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>

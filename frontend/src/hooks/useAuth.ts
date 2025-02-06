@@ -7,18 +7,11 @@ import {
 
 const isLoggedIn = () => {
   return true;
-  // return localStorage.getItem("access_token") !== null
 }
 
 const useAuth = () => {
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
-  // const { data: user, isLoading } = useQuery<UserPublic | null, Error>({
-  //   queryKey: ["currentUser"],
-  //   queryFn: UsersService.readUserMe,
-  //   enabled: isLoggedIn(),
-  // })
-  // Mock user data based on actual API response structure
   const mockUser: UserPublic = {
     email: "tiandi1xc@gmail.com",
     is_active: true,
