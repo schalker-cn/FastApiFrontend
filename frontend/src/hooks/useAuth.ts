@@ -13,7 +13,7 @@ const useAuth = () => {
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
   const mockUser: UserPublic = {
-    email: "tiandi1xc@gmail.com",
+    email: "ab12cde@tum.de",
     is_active: true,
     is_superuser: false,
     full_name: "test",

@@ -18,7 +18,6 @@ import useAuth from "../../hooks/useAuth"
 
 const UserInformation = () => {
   const color = useColorModeValue("inherit", "ui.light")
-  const [editMode, setEditMode] = useState(false)
   const { user: currentUser } = useAuth()
   const {
     formState: { errors },

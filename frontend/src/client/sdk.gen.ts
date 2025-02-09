@@ -57,15 +57,6 @@ export class ItemsService {
     },
   ]
 
-  /**
-   * Read Items
-   * Retrieve items.
-   * @param data The data for the request.
-   * @param data.skip
-   * @param data.limit
-   * @returns ItemsPublic Successful Response
-   * @throws ApiError
-   */
   public static readItems(
     data: ItemsReadItemsData = {},
   ): CancelablePromise<ItemsReadItemsResponse> {
@@ -84,14 +75,6 @@ export class ItemsService {
     }) as CancelablePromise<ItemsReadItemsResponse>
   }
 
-  /**
-   * Create Item
-   * Create new item.
-   * @param data The data for the request.
-   * @param data.requestBody
-   * @returns ItemPublic Successful Response
-   * @throws ApiError
-   */
   public static createItem(
     data: ItemsCreateItemData,
   ): CancelablePromise<ItemsCreateItemResponse> {
@@ -111,39 +94,6 @@ export class ItemsService {
     }) as CancelablePromise<ItemsCreateItemResponse>
   }
 
-  /**
-   * Read Item
-   * Get item by ID.
-   * @param data The data for the request.
-   * @param data.id
-   * @returns ItemPublic Successful Response
-   * @throws ApiError
-   */
-  // TODO - need to update this method
-  public static readItem(
-    data: ItemsReadItemData,
-  ): CancelablePromise<ItemsReadItemResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/api/v1/items/{id}",
-      path: {
-        id: data.id,
-      },
-      errors: {
-        422: "Validation Error",
-      },
-    })
-  }
-
-  /**
-   * Update Item
-   * Update an item.
-   * @param data The data for the request.
-   * @param data.id
-   * @param data.requestBody
-   * @returns ItemPublic Successful Response
-   * @throws ApiError
-   */
 public static updateItem(
   data: ItemsUpdateItemData
 ): Promise<ItemsUpdateItemResponse> {
@@ -172,14 +122,6 @@ public static updateItem(
   })
 }
 
-  /**
-   * Delete Item
-   * Delete an item.
-   * @param data The data for the request.
-   * @param data.id
-   * @returns Message Successful Response
-   * @throws ApiError
-   */
   public static deleteItem(
     data: ItemsDeleteItemData
   ): Promise<ItemsDeleteItemResponse> {

@@ -321,14 +321,6 @@ export const catchErrorCodes = (
   }
 }
 
-/**
- * Request method
- * @param config The OpenAPI configuration object
- * @param options The request options from the service
- * @param axiosClient The axios client instance to use
- * @returns CancelablePromise<T>
- * @throws ApiError
- */
 export const request = <T>(
   config: OpenAPIConfig,
   options: ApiRequestOptions<T>,

@@ -21,7 +21,6 @@ const UserMenu = () => {
 
   return (
     <>
-      {/* Desktop */}
       <Box
         display={{ base: "none", md: "block" }}
         position="fixed"
