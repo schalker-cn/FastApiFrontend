@@ -1,0 +1,24 @@
+1. frontend/public/assets/images/placeholder.png
+2. all files in frontend/src/client folder
+3. frontend/src/components/Common/Sidebar.tsx
+4. frontend/src/components/Common/SidebarItems.tsx
+5. frontend/src/components/Common/ActionsMenu.tsx
+6. frontend/src/components/Items/AddItem.tsx
+7. frontend/src/components/Items/EditItem.tsx
+8. frontend/src/components/Common/DeleteAlert.tsx
+9. frontend/src/components/Common/UserMenu.tsx
+10. frontend/src/components/Common/NotFound.tsx
+11. frontend/src/hooks/useAuth.ts
+12. frontend/src/hooks/useCustomToast.ts
+13. frontend/src/routes/_layout.tsx
+14. frontend/src/routes/__root.tsx
+15. frontend/src/routes/_layout/items.tsx
+16. frontend/src/main.tsx
+17. frontend/src/routeTree.gen.ts
+18. frontend/src/theme.tsx
+19. frontend/src/utils.ts
+20. frontend/src/vite-env.d.ts
+21. frontend/index.html
+22. frontend/package-lock.json
+23. frontend/package.json
+24. frontend/vite.config.ts
