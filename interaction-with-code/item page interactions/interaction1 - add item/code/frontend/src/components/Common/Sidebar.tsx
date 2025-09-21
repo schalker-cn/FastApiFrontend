@@ -20,6 +20,7 @@ const Sidebar = () => {
 
   return (
     <>
+
       {/* Desktop */}
       <Box
         bg={bgColor}

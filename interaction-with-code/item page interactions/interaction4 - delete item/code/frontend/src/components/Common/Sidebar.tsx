@@ -18,6 +18,7 @@ const Sidebar = () => {
   const secBgColor = useColorModeValue("ui.secondary", "ui.darkSlate")
   const currentUser = queryClient.getQueryData<UserPublic>(["currentUser"])
 
+
   return (
     <>
       {/* Desktop */}
