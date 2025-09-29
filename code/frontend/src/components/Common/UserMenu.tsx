@@ -4,7 +4,6 @@ import {
   Menu,
   MenuButton,
 } from "@chakra-ui/react"
-import { FaUserAstronaut } from "react-icons/fa"
 
 const UserMenu = () => {
 
