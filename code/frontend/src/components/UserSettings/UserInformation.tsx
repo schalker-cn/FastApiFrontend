@@ -13,11 +13,16 @@ import { useForm } from "react-hook-form"
 import {
   type UserPublic,
 } from "../../client"
-import useAuth from "../../hooks/useAuth"
 
 const UserInformation = () => {
   const color = useColorModeValue("inherit", "ui.light")
-  const { user: currentUser } = useAuth()
+  const currentUser: UserPublic = {
+    email: "ab12cde@tum.de",
+    is_active: true,
+    is_superuser: false,
+    full_name: "test",
+    id: "d9d7fca5-cf19-42c3-a9d5-42cfa3510598",
+  };
   const {
     formState: { errors },
   } = useForm<UserPublic>({
