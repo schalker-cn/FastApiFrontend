@@ -7,7 +7,6 @@ import {
 } from "@chakra-ui/react"
 import { useQueryClient } from "@tanstack/react-query"
 
-import Logo from "/assets/images/placeholder.png"
 import type { UserPublic } from "../../client"
 import SidebarItems from "./SidebarItems"
 
@@ -37,7 +36,7 @@ const Sidebar = () => {
           borderRadius={12}
         >
           <Box>
-            <Image src={Logo} alt="Logo" w="180px" maxW="2xs" p={6} />
+            <Image src="https://placehold.co/1920x1080/0606FC/0606FC?text=1" alt="Logo" w="180px" maxW="2xs" p={6} />
             <SidebarItems />
           </Box>
           {currentUser?.email && (
